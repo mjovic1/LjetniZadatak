@@ -2,6 +2,7 @@ package Jovic.LjetniZadatak;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,40 @@ public class CRUDOsoba {
 			
 		}
 
+	}
+	
+	public static void update(Osoba osoba) {
+
+		try {
+			PreparedStatement izraz = Baza.getVeza().prepareStatement("update osoba set"
+					+ " ime=?, "
+					+ " prezime=?, "
+					+ " oib=?, "
+					+ " mobitel=? "
+					+ " where sifra=? ");
+			izraz.setString(1, osoba.getIme());
+			izraz.setString(2, osoba.getPrezime());
+			izraz.setString(3, osoba.getOib());
+			izraz.setString(4, osoba.getMobitel());
+			izraz.setInt(5, osoba.getSifra());
+			
+			izraz.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Osoba getOsoba(int redniBroj) {
+		int rb=0;
+		for(Osoba o : read()) {
+			if(++rb==redniBroj) {
+				return o;
+			}
+		}
+		return null;
 	}
 	
 }

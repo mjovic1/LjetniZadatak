@@ -20,7 +20,7 @@ public class Osoba {
 	}
 
 	public Osoba() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public int getSifra() {

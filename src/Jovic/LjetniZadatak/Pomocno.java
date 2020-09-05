@@ -26,6 +26,36 @@ public class Pomocno {
 		}
 	}
 	
+	public static String ucitajString(String poruka, String trenutno) {
+		String s;
+		while(true) {
+			s=JOptionPane.showInputDialog(poruka, trenutno);
+			if(s.trim().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Obavezan unos");
+				continue;
+			}
+			return s;
+		}
+	}
+	
+	public static String VodecePraznine(int broj) {
+		String praznine="";
+		while(broj>0) {
+			broj = broj/10;
+			praznine+=" ";
+		}
+		return praznine;
+	}
+	
+	public static int brojZnamenki(int broj) {
+		int znamenke = 0;
+		while(broj>0) {
+			broj=broj/10;
+			znamenke++;
+		}
+		return znamenke;
+	}
+	
 	
 	
 }
