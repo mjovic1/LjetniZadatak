@@ -14,6 +14,17 @@ public class Pomocno {
 				
 	}
 	
+	public static int ucitajBroj(String poruka, int trenutno) {
+		while(true) {
+			try {
+				return Integer.parseInt(
+						JOptionPane.showInputDialog(poruka, trenutno));
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Krivi unos");
+			}
+		}
+	}
+	
 	public static String ucitajString(String poruka) {
 		String s;
 		while(true) {

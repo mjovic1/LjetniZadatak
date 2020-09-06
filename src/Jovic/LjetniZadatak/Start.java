@@ -30,7 +30,7 @@ public class Start {
 			izbornik();
 			break;
 		case 2:
-			CRUDOsoba.create(new Osoba(1, Pomocno.ucitajString("Unesi ime"),
+			CRUDOsoba.create(new Osoba(1,Pomocno.ucitajString("Unesi ime"),
 					Pomocno.ucitajString("Unesi prezime"),
 					Pomocno.ucitajString("Unesi OIB"),
 					Pomocno.ucitajString("Unesi mobitel")));
@@ -39,10 +39,23 @@ public class Start {
 		case 3:
 			promjeniOsobu();
 			izbornik();
+			break;
+		case 4:
+			obrisiOsobu();
 		default:
-				
+				break;
 		}
 		
+		
+	}
+
+	private void obrisiOsobu() {
+		Osoba osoba = odaberiOsobu("Unesite redni broj osobe koju želite obrisati");
+		if(osoba==null) {
+			JOptionPane.showMessageDialog(null, "Neispravan redni broj");
+			return;
+		}
+		CRUDOsoba.delete(osoba.getSifra());
 		
 	}
 
@@ -54,7 +67,7 @@ public class Start {
 		}
 		osoba.setIme(Pomocno.ucitajString("Promjeni ime", osoba.getIme()));
 		osoba.setPrezime(Pomocno.ucitajString("Promjeni prezime", osoba.getPrezime()));
-		osoba.setOib(Pomocno.ucitajString("Promjeni OIB", osoba.getOib()));
+		osoba.setOIB(Pomocno.ucitajString("Promjeni OIB", osoba.getOIB()));
 		osoba.setMobitel(Pomocno.ucitajString("Promjeni mobitel", osoba.getMobitel()));
 		
 	}

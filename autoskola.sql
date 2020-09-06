@@ -32,8 +32,8 @@ create table osoba(
     sifra int not null primary key auto_increment,
     ime varchar(30) not null,
     prezime varchar(30) not null,
-    OIB int,
-    mobitel int not null
+    OIB char(11),
+    mobitel varchar(20)
 );
 
 create table vozilo(

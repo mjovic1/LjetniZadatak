@@ -10,7 +10,7 @@ public class CRUDOsoba {
 
 	
 	public static List<Osoba> read(){
-		List<Osoba> osobe = new ArrayList<>();
+		List<Osoba> osobe = new ArrayList<Osoba>();
 	
 		try {
 			PreparedStatement izraz = Baza.getVeza().prepareStatement("select * from osoba order by prezime");
@@ -20,14 +20,14 @@ public class CRUDOsoba {
 						rs.getInt("sifra"),
 						rs.getString("ime"),
 						rs.getString("prezime"),
-						rs.getString("oib"),
+						rs.getString("OIB"),
 						rs.getString("mobitel")
 						));
 			}
 			rs.close();
 			izraz.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		
@@ -36,11 +36,11 @@ public class CRUDOsoba {
 	
 	public static void create(Osoba osoba) {
 		try {
-			PreparedStatement izraz = Baza.getVeza().prepareStatement(" insert into osoba " + " (ime,prezime,oib,mobitel) " + " values (?,?,?,?) ");
+			PreparedStatement izraz = Baza.getVeza().prepareStatement(" insert into osoba " + " (ime,prezime,OIB,mobitel) " + " values (?, ?, ?, ?) ");
 			izraz.setString(1, osoba.getIme());
-			izraz.setString(1, osoba.getPrezime());
-			izraz.setString(1, osoba.getOib());
-			izraz.setString(1, osoba.getMobitel());
+			izraz.setString(2, osoba.getPrezime());
+			izraz.setString(3, osoba.getOIB());
+			izraz.setString(4, osoba.getMobitel());
 			
 			izraz.executeUpdate();
 			
@@ -57,12 +57,12 @@ public class CRUDOsoba {
 			PreparedStatement izraz = Baza.getVeza().prepareStatement("update osoba set"
 					+ " ime=?, "
 					+ " prezime=?, "
-					+ " oib=?, "
+					+ " OIB=?, "
 					+ " mobitel=? "
 					+ " where sifra=? ");
 			izraz.setString(1, osoba.getIme());
 			izraz.setString(2, osoba.getPrezime());
-			izraz.setString(3, osoba.getOib());
+			izraz.setString(3, osoba.getOIB());
 			izraz.setString(4, osoba.getMobitel());
 			izraz.setInt(5, osoba.getSifra());
 			
@@ -74,6 +74,20 @@ public class CRUDOsoba {
 			e.printStackTrace();
 		}
 	}
+	
+	public  static void delete(int sifra) {
+		try {
+			PreparedStatement izraz = Baza.getVeza().prepareStatement("delete from osoba"
+					+ " where sifra=? ");
+			
+			izraz.setInt(1, sifra);
+			izraz.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	public static Osoba getOsoba(int redniBroj) {
 		int rb=0;
